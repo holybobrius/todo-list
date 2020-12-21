@@ -1,0 +1,102 @@
+html {
+    background-color: #212121;
+    color: white;
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 70px;
+    text-align: center;
+    margin: 35px;
+}
+
+#content {
+    display: flex;
+    gap: 100px;
+    margin-left: 30px;
+}
+
+.data-container {
+    background-color: #292929;
+    border-radius: 5px;
+    width: 20px;
+    min-height: 700px;
+}
+
+#lists-container {
+    min-width: 350px;
+}
+
+#tasks-container {
+    min-width: 1300px;
+}
+
+.container-item {
+    border-bottom: 1px solid #313131;
+    height: 8%;
+    transition: 100ms;
+    display: flex;
+    align-items: center;
+}
+
+.container-item:hover {
+    background-color: #313131;
+}
+
+.delete-list-icon {
+    margin-left: auto;
+    margin-right: 20px;
+    color: white;
+}
+
+.list-name {
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+.task-buttons {
+    margin-left: auto;
+    margin-right: 20px;
+}
+.delete-task-icon {
+    margin-left: 8px;
+}
+.expand-task-icon {
+    margin-left: 8px;
+}
+
+.task-data {
+    margin-left: 15px;
+    display: flex;
+    gap: 40px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.lists-header {
+    display: flex;
+    height: 8%;
+    align-items: center;
+    border-bottom: 1px solid #313131;
+}
+
+.new-list-icon {
+    margin-left: auto;
+    margin-right: 20px;
+}
+.new-task-icon {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+h2 {
+    margin-left: 15px;
+    color: gray;
+}
+
+.selected {
+    background-color: #313131;
+    font-weight: bold;
+}
