@@ -7,6 +7,37 @@
      <link rel="stylesheet" href="icons/css/all.css"
    </head>
    <body>
+
+    <div class="new-task-popup">
+      <div class="popup-content">
+        <span class="close-task-popup">&times;</span>
+        <h2 class="add-new-task-title">Add New Task</h2>
+        <div class="task-info-input">
+          <label class="popup-header">Name: </label>
+          <input type="text" class="popup-text-field" id="popup-task-name-input" maxlength="20" required>
+        </div>
+        <div class="task-info-input">
+          <label class="popup-header">Description: </label>
+          <input type="text" class="popup-text-field" id="popup-task-description-input" maxlength="100" required>
+        </div>
+        <div class="task-info-input">
+          <label class="popup-header">Due to: </label>
+          <input type="date" class="popup-date-field" id="popup-task-duedate-input" required>
+        </div>
+        <div class="task-info-input">
+          <label class="popup-header">Priority: </label>
+          <select class="popup-priority-field" id="popup-task-priority-input">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <div class="submit-field">
+          <button class="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+
      <h1>To Do List</h1>
      <div id="content">
        <div id="lists-container" class="data-container">
@@ -44,7 +75,7 @@
        <div id="tasks-container" class="data-container">
         <div class="lists-header">
           <h2>Tasks</h2>
-          <a class="new-task-icon">
+          <a href="#" id="new-task-icon">
            <i class="fas fa-plus"></i>
           </a>
         </div>

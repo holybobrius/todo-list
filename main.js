@@ -1,1 +1,1 @@
-console.log("test");
+(()=>{const e=document.querySelector("#new-task-icon"),c=document.querySelector(".new-task-popup");e.onclick=function(){c.style.display="block"}})();
