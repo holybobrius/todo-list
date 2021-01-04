@@ -16,9 +16,13 @@ function buildNewTask(name, description, dueDate, priority) {
     const taskPriority = document.createElement('p');
     taskPriority.classList.add('task-priorityP');
     taskPriority.innerHTML = `Priority: ${priority}`;
+    const taskDescription = document.createElement('p');
+    taskDescription.classList.add('task-description');
+    taskDescription.innerHTML = `Description: ${description}`;
     taskData.appendChild(taskName);
     taskData.appendChild(taskDueDate);
     taskData.appendChild(taskPriority);
+    taskData.appendChild(taskDescription);
     //creating task buttons
     const taskButtons = document.createElement('div');
     taskButtons.classList.add('task-buttons');
@@ -48,6 +52,42 @@ function buildNewTask(name, description, dueDate, priority) {
     task.appendChild(taskData);
     task.appendChild(taskButtons);
     tasksContainer.appendChild(task);
+
 }
 
-export {buildNewTask}
+let expanded = false;
+let checked = false;
+function expandTask(expandIcon) {
+    let targetTask = (expandIcon.parentElement).parentElement;
+    const description = targetTask.getElementsByClassName("task-description").item(0);
+    if (expanded == false) {
+        targetTask.style.minHeight = "16%";
+        description.style.display = "block";
+        expanded = true;
+    } else {
+        targetTask.style.minHeight = "8%";
+        description.style.display = "none";
+        expanded = false;
+    }
+}
+
+function checkTask(checkedIcon) {
+    let targetTask = (checkedIcon.parentElement).parentElement;
+    let targetData = targetTask.getElementsByClassName("task-data").item(0);
+    if (checked == false) {
+        targetData.style.color = "green";
+        targetData.style.textDecoration = "line-through";
+        checked = true;
+    } else {
+        targetData.style.color = "white";
+        targetData.style.textDecoration = "none";
+        checked = false;
+    }
+}
+
+function deleteTask(deleteIcon) { 
+    let targetTask = (deleteIcon.parentElement).parentElement;
+    targetTask.remove();
+}
+
+export {buildNewTask, expandTask, deleteTask, checkTask}
