@@ -8,6 +8,19 @@
    </head>
    <body>
 
+    <div class="new-list-popup">
+      <div class="popup-content">
+        <span class="close-list-popup">&times;</span>
+        <h2 class="add-new-task-title">Add New List</h2>
+        <div class="task-info-input">
+          <label class="popup-header">Name: </label>
+          <input type="text" class="popup-text-field" id="popup-list-name-input" maxlength="20" required>
+          <div class="submit-field">
+            <button class="submit" id="submit-list" style="margin-top: 15px;">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="new-task-popup">
       <div class="popup-content">
         <span class="close-task-popup">&times;</span>
@@ -49,28 +62,7 @@
          </div>
          <div class="list container-item selected">
            <p class="list-name">Default</p>
-           <a class="delete-list-icon">
-            <i class="far fa-trash-alt"></i>
-           </a>
          </div>
-         <div class="list container-item">
-          <p class="list-name">Default</p>
-          <a class="delete-list-icon">
-           <i class="far fa-trash-alt"></i>
-          </a>
-        </div>
-        <div class="list container-item">
-          <p class="list-name">Default</p>
-          <a class="delete-list-icon">
-           <i class="far fa-trash-alt"></i>
-          </a>
-        </div>
-        <div class="list container-item">
-          <p class="list-name">Default</p>
-          <a class="delete-list-icon">
-           <i class="far fa-trash-alt"></i>
-          </a>
-        </div>
        </div>
        <div id="tasks-container" class="data-container">
         <div class="lists-header">
