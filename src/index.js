@@ -1,5 +1,4 @@
-import {addTask} from "./newTask";
-import {addList} from "./newList";
+import {addTask, addList} from "./newTask";
 import {expandTask, checkTask, deleteTask, deleteList} from "./DOMBuilding";
 
 const newTask = document.querySelector("#new-task-icon");
