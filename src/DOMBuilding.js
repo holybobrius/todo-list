@@ -1,4 +1,22 @@
 const tasksContainer = document.querySelector('#tasks-container');
+const listsContainer = document.querySelector('#lists-container')
+
+function buildNewList(name) {
+    const list = document.createElement('div');
+    list.classList.add('list', 'container-item');
+    const listName = document.createElement('p');
+    listName.classList.add('list-name');
+    listName.innerHTML = name;
+    const deleteListButton = document.createElement('a');
+    deleteListButton.classList.add('delete-list-icon');
+    const deleteListIcon = document.createElement('i');
+    deleteListButton.classList.add('far', 'fa-trash-alt');
+    deleteListButton.appendChild(deleteListIcon);
+    list.appendChild(listName);
+    list.appendChild(deleteListButton);
+    
+    listsContainer.appendChild(list);
+}
 
 function buildNewTask(name, description, dueDate, priority) {
     const task = document.createElement('div');
@@ -90,4 +108,9 @@ function deleteTask(deleteIcon) {
     targetTask.remove();
 }
 
-export {buildNewTask, expandTask, deleteTask, checkTask}
+function deleteList(deleteIcon) {
+    let targetList = deleteIcon.parentElement;
+    targetList.remove();
+}
+
+export {buildNewTask, buildNewList, expandTask, deleteTask, checkTask, deleteList}
