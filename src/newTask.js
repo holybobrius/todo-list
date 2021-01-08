@@ -17,6 +17,17 @@ class Task {
     }
 }
 
+class List {
+    constructor(name) {
+        this.name = name;
+        this.content = [];
+    }
+
+    addTaskToList(task) { 
+        this.content.push(task);
+    }
+}
+
 let currentList = new List("Default");
 
 function addTask() {
@@ -33,16 +44,7 @@ function addTask() {
 const listNameField = document.querySelector('#popup-list-name-input');
 const newListPopup = document.querySelector('.new-list-popup');
 
-class List {
-    constructor(name) {
-        this.name = name;
-        this.content = [];
-    }
 
-    addTaskToList(task) { 
-        content.push(task);
-    }
-}
 
 
 function addList() {
