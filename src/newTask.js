@@ -7,6 +7,7 @@ const priorityField = document.querySelector('#popup-task-priority-input');
 const newTaskPopup = document.querySelector(".new-task-popup");
 
 
+let listsArr = [];
 
 class Task {
     constructor(name, description, dueDate, priority) {
@@ -29,6 +30,7 @@ class List {
 }
 
 let currentList = new List("Default");
+listsArr.push(currentList);
 
 function addTask() {
     if(nameField.value != "" && descriptionField.value != "" && dueDateField.value != "" && priorityField.value != "") {
@@ -51,6 +53,8 @@ function addList() {
     if(listNameField.value != "") {
         let newList = new List(listNameField.value);
         buildNewList(newList.name);
+        listsArr.push(newList);
+        console.log(listsArr);
         newListPopup.style.display = "none";
         console.log(newList);
     }
