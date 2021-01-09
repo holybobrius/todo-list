@@ -246,5 +246,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .checked {
     color: green;
-    text-decoration: line-through;
+    text-decoration: line;
 }
