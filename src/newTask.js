@@ -1,14 +1,21 @@
 /* eslint-disable max-len */
 import {
-  buildNewTask, buildNewList, getListIndex, getTaskIndex, deleteTaskDOM, checkTaskDOM,
-} from './DOMBuilding';
+  buildNewTask,
+  buildNewList,
+  getListIndex,
+  getTaskIndex,
+  deleteTaskDOM,
+  checkTaskDOM,
+} from "./DOMBuilding";
 
-const nameField = document.querySelector('#popup-task-name-input');
-const descriptionField = document.querySelector('#popup-task-description-input');
-const dueDateField = document.querySelector('#popup-task-duedate-input');
-const priorityField = document.querySelector('#popup-task-priority-input');
-const newTaskPopup = document.querySelector('.new-task-popup');
-const tasks = document.querySelector('#tasks');
+const nameField = document.querySelector("#popup-task-name-input");
+const descriptionField = document.querySelector(
+  "#popup-task-description-input"
+);
+const dueDateField = document.querySelector("#popup-task-duedate-input");
+const priorityField = document.querySelector("#popup-task-priority-input");
+const newTaskPopup = document.querySelector(".new-task-popup");
+const tasks = document.querySelector("#tasks");
 
 const listsArr = [];
 
@@ -34,25 +41,48 @@ class List {
 
   render() {
     for (let i = 0; i < this.content.length; i++) {
-      buildNewTask(this.content[i].name, this.content[i].description, this.content[i].dueDate, this.content[i].priority, this.content[i].checked);
+      buildNewTask(
+        this.content[i].name,
+        this.content[i].description,
+        this.content[i].dueDate,
+        this.content[i].priority,
+        this.content[i].checked
+      );
     }
   }
 }
 
-let currentList = new List('Default');
+let currentList = new List("Default");
 listsArr.push(currentList);
 
 function addTask() {
-  if (nameField.value != '' && descriptionField.value != '' && dueDateField.value != '' && priorityField.value != '') {
-    const newTask = new Task(nameField.value, descriptionField.value, dueDateField.value, priorityField.value, false);
+  if (
+    nameField.value != "" &&
+    descriptionField.value != "" &&
+    dueDateField.value != "" &&
+    priorityField.value != ""
+  ) {
+    const newTask = new Task(
+      nameField.value,
+      descriptionField.value,
+      dueDateField.value,
+      priorityField.value,
+      false
+    );
     currentList.content.push(newTask);
-    buildNewTask(newTask.name, newTask.description, newTask.dueDate, newTask.priority, newTask.checked);
-    newTaskPopup.style.display = 'none';
+    buildNewTask(
+      newTask.name,
+      newTask.description,
+      newTask.dueDate,
+      newTask.priority,
+      newTask.checked
+    );
+    newTaskPopup.style.display = "none";
   }
 }
 
-const listNameField = document.querySelector('#popup-list-name-input');
-const newListPopup = document.querySelector('.new-list-popup');
+const listNameField = document.querySelector("#popup-list-name-input");
+const newListPopup = document.querySelector(".new-list-popup");
 
 function deleteTask(task) {
   currentList.content.splice(getTaskIndex(task), 1);
@@ -60,18 +90,18 @@ function deleteTask(task) {
 }
 
 function addList() {
-  if (listNameField.value != '') {
+  if (listNameField.value != "") {
     const newList = new List(listNameField.value);
     buildNewList(newList.name);
     listsArr.push(newList);
     console.table(`Lists array: ${listsArr}`);
-    newListPopup.style.display = 'none';
+    newListPopup.style.display = "none";
   }
 }
 
 function selectCurrentList(list) {
   currentList = listsArr[getListIndex(list)];
-  tasks.innerHTML = '';
+  tasks.innerHTML = "";
   currentList.render();
 }
 
@@ -84,6 +114,4 @@ function checkTask(task) {
   checkTaskDOM(task);
 }
 
-export {
-  addList, addTask, selectCurrentList, deleteTask, checkTask,
-};
+export { addList, addTask, selectCurrentList, deleteTask, checkTask };
