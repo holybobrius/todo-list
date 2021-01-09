@@ -1,5 +1,5 @@
-import {addTask, addList} from "./newTask";
-import {expandTask, checkTask, deleteTask, deleteList,  changeActiveList} from "./DOMBuilding";
+import {addTask, addList, selectCurrentList, deleteTask, checkTask} from "./newTask";
+import {expandTask, deleteList,  changeActiveListDOM} from "./DOMBuilding";
 
 const newTask = document.querySelector("#new-task-icon");
 const newTaskPopup = document.querySelector(".new-task-popup");
@@ -14,6 +14,7 @@ const newListPopup = document.querySelector('.new-list-popup');
 const closeListPopup = document.querySelector('.close-list-popup');
 let deleteListButtons = document.querySelectorAll('.delete-list-icon');
 let lists = document.querySelectorAll('.list');
+let tasks = document.querySelectorAll('.tasks');
 
 newTask.onclick = function() {
     newTaskPopup.style.display = "block";
@@ -37,14 +38,13 @@ submitTask.addEventListener('click', () => {
     checkedTaskButtons = document.querySelectorAll('.checked-task-icon');
     deleteTaskButtons = document.querySelectorAll('.delete-task-icon');
     expandTaskButtons.forEach(expandTaskButton => expandTaskButton.onclick = function() {
-        console.log(expandTaskButtons);
         expandTask(this);
     });
     checkedTaskButtons.forEach(checkedTaskButton => checkedTaskButton.onclick = function() {
-        checkTask(this);
+        checkTask(this.parentElement.parentElement);
     })
     deleteTaskButtons.forEach(deleteTaskButton => deleteTaskButton.onclick = function() {
-        deleteTask(this);
+        deleteTask(this.parentElement.parentElement);
     })
 })
 
@@ -55,10 +55,23 @@ submitList.addEventListener('click', () => {
     deleteListButtons.forEach(deleteListButton => deleteListButton.onclick = function() {
         deleteList(this);
     });
-    console.log(lists);
     lists.forEach(list => list.addEventListener('click', () => {
-        changeActiveList(list);
-    }));
+        changeActiveListDOM(list);
+        selectCurrentList(list);
+        expandTaskButtons = document.querySelectorAll('.expand-task-icon');
+        checkedTaskButtons = document.querySelectorAll('.checked-task-icon');
+        deleteTaskButtons = document.querySelectorAll('.delete-task-icon');
+        expandTaskButtons.forEach(expandTaskButton => expandTaskButton.onclick = function() {
+            expandTask(this);
+        });
+        checkedTaskButtons.forEach(checkedTaskButton => checkedTaskButton.onclick = function() {
+            checkTask(this.parentElement.parentElement);
+        })
+        deleteTaskButtons.forEach(deleteTaskButton => deleteTaskButton.onclick = function() {
+            let targetTask = (this.parentElement).parentElement;
+            deleteTask(targetTask);
+        })
+        }));
 })
 
 
@@ -67,9 +80,9 @@ expandTaskButtons.forEach(expandTaskButton => expandTaskButton.onclick = functio
     expandTask(this);
 });
 
-checkedTaskButtons.forEach(checkedTaskButton => checkedTaskButton.onclick = checkTask(this));
+checkedTaskButtons.forEach(checkedTaskButton => checkedTaskButton.onclick = checkTask(this.parentElement.parentElement));
 
-deleteTaskButtons.forEach(deleteTaskButton => deleteTaskButton.onclick = deleteTask(this));
+deleteTaskButtons.forEach(deleteTaskButton => deleteTaskButton.onclick = deleteTask((this.parentElement).parentElement));
 
 deleteListButtons.forEach(deleteListButton => deleteListButton.onclick = function() {
     deleteList(this);

@@ -1,20 +1,22 @@
-import {buildNewTask, buildNewList} from "./DOMBuilding";
+import {buildNewTask, buildNewList, getListIndex, getTaskIndex, deleteTaskDOM, checkTaskDOM} from "./DOMBuilding";
 
 const nameField = document.querySelector("#popup-task-name-input");
 const descriptionField = document.querySelector('#popup-task-description-input');
 const dueDateField = document.querySelector('#popup-task-duedate-input');
 const priorityField = document.querySelector('#popup-task-priority-input');
 const newTaskPopup = document.querySelector(".new-task-popup");
+let tasks = document.querySelector('#tasks');
 
 
 let listsArr = [];
 
 class Task {
-    constructor(name, description, dueDate, priority) {
+    constructor(name, description, dueDate, priority, checked) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.checked = checked;
     }
 }
 
@@ -27,6 +29,12 @@ class List {
     addTaskToList(task) { 
         this.content.push(task);
     }
+
+    render() {
+        for(let i = 0; i < this.content.length; i++) {
+            buildNewTask(this.content[i].name, this.content[i].description, this.content[i].dueDate, this.content[i].priority, this.content[i].checked);
+        } 
+    }
 }
 
 let currentList = new List("Default");
@@ -34,12 +42,10 @@ listsArr.push(currentList);
 
 function addTask() {
     if(nameField.value != "" && descriptionField.value != "" && dueDateField.value != "" && priorityField.value != "") {
-        let newTask = new Task(nameField.value, descriptionField.value, dueDateField.value, priorityField.value);
+        let newTask = new Task(nameField.value, descriptionField.value, dueDateField.value, priorityField.value, false);
         currentList.content.push(newTask);
-        buildNewTask(newTask.name, newTask.description, newTask.dueDate, newTask.priority);
-        console.log(newTask);
+        buildNewTask(newTask.name, newTask.description, newTask.dueDate, newTask.priority, newTask.checked);
         newTaskPopup.style.display = "none";
-        console.log(currentList);
     }
 }
 
@@ -47,6 +53,11 @@ const listNameField = document.querySelector('#popup-list-name-input');
 const newListPopup = document.querySelector('.new-list-popup');
 
 
+
+function deleteTask(task) {
+    currentList.content.splice(getTaskIndex(task), 1);
+    deleteTaskDOM(task);
+}
 
 
 function addList() {
@@ -56,12 +67,22 @@ function addList() {
         listsArr.push(newList);
         console.table(`Lists array: ${listsArr}`);
         newListPopup.style.display = "none";
-        console.log(newList.content);
     }
 }
 
+function selectCurrentList(list) {
+    currentList = listsArr[getListIndex(list)];
+    tasks.innerHTML = '';
+    currentList.render();
+}
 
+function checkTask(task) { 
+    if(currentList.content[getTaskIndex(task)].checked === false) {
+        currentList.content[getTaskIndex(task)].checked = true;
+    } else {
+        currentList.content[getTaskIndex(task)].checked = false;
+    }
+    checkTaskDOM(task);
+}
 
-
-
-export {addList, addTask}
+export {addList, addTask, selectCurrentList, deleteTask, checkTask}

@@ -1,6 +1,8 @@
-const tasksContainer = document.querySelector('#tasks-container');
+const tasksContainer = document.querySelector('#tasks');
 const listsContainer = document.querySelector('#lists-container');
 let currentListDOM = document.querySelector('.selected');
+let lists = Array.from(document.querySelectorAll('.list'));
+let tasks = Array.from(document.querySelectorAll('.task'));
 
 function buildNewList(name) {
     const list = document.createElement('div');
@@ -19,7 +21,7 @@ function buildNewList(name) {
     listsContainer.appendChild(list);
 }
 
-function buildNewTask(name, description, dueDate, priority) {
+function buildNewTask(name, description, dueDate, priority, checked) {
     const task = document.createElement('div');
     task.classList.add('task');
     task.classList.add('container-item');
@@ -64,6 +66,9 @@ function buildNewTask(name, description, dueDate, priority) {
     deleteIcon.classList.add('fas', 'fa-trash-alt');
     deleteTaskButton.appendChild(deleteIcon);
 
+    if(checked === true) {
+        taskData.classList.add('checked');
+    }
 
     taskButtons.appendChild(checkedTaskButton);
     taskButtons.appendChild(expandTaskButton);
@@ -75,7 +80,7 @@ function buildNewTask(name, description, dueDate, priority) {
 }
 
 let expanded = false;
-let checked = false;
+let ifChecked = false;
 function expandTask(expandIcon) {
     let targetTask = (expandIcon.parentElement).parentElement;
     const description = targetTask.getElementsByClassName("task-description").item(0);
@@ -90,35 +95,42 @@ function expandTask(expandIcon) {
     }
 }
 
-function checkTask(checkedIcon) {
-    let targetTask = (checkedIcon.parentElement).parentElement;
-    let targetData = targetTask.getElementsByClassName("task-data").item(0);
-    if (checked == false) {
-        targetData.style.color = "green";
-        targetData.style.textDecoration = "line-through";
-        checked = true;
+function checkTaskDOM(task) {
+    let targetData = task.getElementsByClassName("task-data").item(0);
+    if (ifChecked == false) {
+        targetData.classList.add('checked');
+        ifChecked = true;
     } else {
-        targetData.style.color = "white";
-        targetData.style.textDecoration = "none";
-        checked = false;
+        targetData.classList.remove('checked');
+        ifChecked = false;
     }
 }
 
-function deleteTask(deleteIcon) { 
-    let targetTask = (deleteIcon.parentElement).parentElement;
-    targetTask.remove();
+function deleteTaskDOM(task) { 
+    task.remove();
 }
 
 function deleteList(deleteIcon) {
     let targetList = deleteIcon.parentElement;
+    tasksContainer.innerHTML = "";
     targetList.remove();
 }
 
-function changeActiveList(newListDOM) {
+function changeActiveListDOM(newListDOM) {
     currentListDOM.classList.remove("selected");
     newListDOM.classList.add("selected");
     currentListDOM = newListDOM;
-    console.log('changing active list');
 }
 
-export {buildNewTask, buildNewList, expandTask, deleteTask, checkTask, deleteList, changeActiveList}
+function getListIndex(list) {
+    lists = Array.from(document.querySelectorAll('.list'));
+    return lists.indexOf(list);
+}
+
+function getTaskIndex(task) { 
+    tasks = Array.from(document.querySelectorAll('.task'));
+    return tasks.indexOf(task);
+}
+
+
+export {buildNewTask, buildNewList, expandTask, deleteTaskDOM, checkTaskDOM, deleteList, changeActiveListDOM, getListIndex, getTaskIndex}
