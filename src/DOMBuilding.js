@@ -1,5 +1,6 @@
 const tasksContainer = document.querySelector('#tasks-container');
-const listsContainer = document.querySelector('#lists-container')
+const listsContainer = document.querySelector('#lists-container');
+let currentListDOM = document.querySelector('.selected');
 
 function buildNewList(name) {
     const list = document.createElement('div');
@@ -113,4 +114,11 @@ function deleteList(deleteIcon) {
     targetList.remove();
 }
 
-export {buildNewTask, buildNewList, expandTask, deleteTask, checkTask, deleteList}
+function changeActiveList(newListDOM) {
+    currentListDOM.classList.remove("selected");
+    newListDOM.classList.add("selected");
+    currentListDOM = newListDOM;
+    console.log('changing active list');
+}
+
+export {buildNewTask, buildNewList, expandTask, deleteTask, checkTask, deleteList, changeActiveList}

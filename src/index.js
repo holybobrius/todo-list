@@ -1,5 +1,5 @@
 import {addTask, addList} from "./newTask";
-import {expandTask, checkTask, deleteTask, deleteList} from "./DOMBuilding";
+import {expandTask, checkTask, deleteTask, deleteList,  changeActiveList} from "./DOMBuilding";
 
 const newTask = document.querySelector("#new-task-icon");
 const newTaskPopup = document.querySelector(".new-task-popup");
@@ -13,6 +13,7 @@ const newList = document.querySelector('.new-list-icon');
 const newListPopup = document.querySelector('.new-list-popup');
 const closeListPopup = document.querySelector('.close-list-popup');
 let deleteListButtons = document.querySelectorAll('.delete-list-icon');
+let lists = document.querySelectorAll('.list');
 
 newTask.onclick = function() {
     newTaskPopup.style.display = "block";
@@ -49,14 +50,20 @@ submitTask.addEventListener('click', () => {
 
 submitList.addEventListener('click', () => {
     addList();
+    lists = document.querySelectorAll('.list');
     deleteListButtons = document.querySelectorAll('.delete-list-icon');
     deleteListButtons.forEach(deleteListButton => deleteListButton.onclick = function() {
         deleteList(this);
     });
+    console.log(lists);
+    lists.forEach(list => list.addEventListener('click', () => {
+        changeActiveList(list);
+    }));
 })
 
+
+
 expandTaskButtons.forEach(expandTaskButton => expandTaskButton.onclick = function() {
-    console.log(expandTaskButtons);
     expandTask(this);
 });
 

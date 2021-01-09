@@ -54,15 +54,14 @@ function addList() {
         let newList = new List(listNameField.value);
         buildNewList(newList.name);
         listsArr.push(newList);
-        console.log(listsArr);
+        console.table(`Lists array: ${listsArr}`);
         newListPopup.style.display = "none";
-        console.log(newList);
+        console.log(newList.content);
     }
 }
 
 
 
-export {addList}
 
 
-export {addTask}
+export {addList, addTask}
