@@ -243,3 +243,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .task-dueDate {
     min-width: 100px;
 }
+
+.checked {
+    color: green;
+    text-decoration: line-through;
+}
