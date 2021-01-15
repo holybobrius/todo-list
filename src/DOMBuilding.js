@@ -25,7 +25,7 @@ function buildNewTask(name, description, dueDate, priority, checked) {
   const task = document.createElement("div");
   task.classList.add("task");
   task.classList.add("container-item");
-  //creating task data
+  // creating task data
   const taskData = document.createElement("div");
   taskData.classList.add("task-data");
   const taskName = document.createElement("p");
@@ -44,22 +44,22 @@ function buildNewTask(name, description, dueDate, priority, checked) {
   taskData.appendChild(taskDueDate);
   taskData.appendChild(taskPriority);
   taskData.appendChild(taskDescription);
-  //creating task buttons
+  // creating task buttons
   const taskButtons = document.createElement("div");
   taskButtons.classList.add("task-buttons");
-  //adding checked button
+  // adding checked button
   const checkedTaskButton = document.createElement("a");
   checkedTaskButton.classList.add("checked-task-icon");
   const checkedIcon = document.createElement("i");
   checkedIcon.classList.add("fas", "fa-check");
   checkedTaskButton.appendChild(checkedIcon);
-  //adding expand button
+  // adding expand button
   const expandTaskButton = document.createElement("a");
   expandTaskButton.classList.add("expand-task-icon");
   const expandIcon = document.createElement("i");
   expandIcon.classList.add("fas", "fa-search");
   expandTaskButton.appendChild(expandIcon);
-  //adding delete button
+  // adding delete button
   const deleteTaskButton = document.createElement("a");
   deleteTaskButton.classList.add("delete-task-icon");
   const deleteIcon = document.createElement("i");
@@ -81,11 +81,11 @@ function buildNewTask(name, description, dueDate, priority, checked) {
 let expanded = false;
 let ifChecked = false;
 function expandTask(expandIcon) {
-  let targetTask = expandIcon.parentElement.parentElement;
+  const targetTask = expandIcon.parentElement.parentElement;
   const description = targetTask
     .getElementsByClassName("task-description")
     .item(0);
-  if (expanded == false) {
+  if (expanded === false) {
     targetTask.style.minHeight = "16%";
     description.style.display = "block";
     expanded = true;
@@ -97,8 +97,8 @@ function expandTask(expandIcon) {
 }
 
 function checkTaskDOM(task) {
-  let targetData = task.getElementsByClassName("task-data").item(0);
-  if (ifChecked == false) {
+  const targetData = task.getElementsByClassName("task-data").item(0);
+  if (ifChecked === false) {
     targetData.classList.add("checked");
     ifChecked = true;
   } else {
@@ -112,7 +112,7 @@ function deleteTaskDOM(task) {
 }
 
 function deleteList(deleteIcon) {
-  let targetList = deleteIcon.parentElement;
+  const targetList = deleteIcon.parentElement;
   tasksContainer.innerHTML = "";
   targetList.remove();
 }
